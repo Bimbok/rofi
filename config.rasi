@@ -1,0 +1,206 @@
+/*
+#  ____        __ _  
+# |  _ \ ___  / _(_) 
+# | |_) / _ \| |_| | 
+# |  _ < (_) |  _| | 
+# |_| \_\___/|_| |_| 
+#                    
+# by Stephan Raabe (2023) 
+# Modified for matugen dark beauty
+# ----------------------------------------------------- 
+*/
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,filebrowser,window,run";
+    font:                       "Fira Sans 11";
+    show-icons:                 true;
+    display-drun:                " ";
+    display-run:                 " ";
+    display-filebrowser:         "";
+    display-window:              "";
+    drun-display-format:        "{name}";
+    hover-select:               false;
+    scroll-method:              1;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
+    window-format:              "{w} · {c} · {t}";
+}
+
+/* ---- Load colors ---- */
+@theme "~/.config/rofi/colors.rasi"
+
+/* ---- Custom Variables mapped to Matugen ---- */
+* {
+    background-window:           #101417CC; /* surface with transparency */
+    background-pill:             @primary;
+    text-on-pill:                @on-primary;
+    text-normal:                 @on-surface;
+    border-radius-large:         60px;
+    border-radius-medium:        30px;
+}
+
+// Main Window //
+window {
+    height:                      35em;
+    width:                       56em;
+    transparency:                "real";
+    fullscreen:                  false;
+    enabled:                     true;
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border:                      0px;
+    border-radius:               @border-radius-large;
+    background-color:            @background-window;
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "imagebox" , "listbox" ];
+    background-color:            transparent;
+}
+
+imagebox {
+    padding:                     3em;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy", "mode-switcher" ];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+// Modes //
+mode-switcher {
+    orientation:                 horizontal;
+    enabled:                     true;
+    padding:                     0em;
+    spacing:                     1em;
+    background-color:            transparent;
+}
+
+button {
+    padding:                     1.2em;
+    border-radius:               @border-radius-medium;
+    border:                      0;    
+    cursor:                      pointer;
+    background-color:            @surface-container;
+    text-color:                  @on-surface;
+}
+
+button selected {
+    background-color:            @background-pill;
+    text-color:                  @text-on-pill;
+}
+
+// Inputs //
+inputbar {
+    enabled:                     true;
+    spacing:                     0.5em;
+    padding:                     0.8em 1.5em;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+    border-radius:               @border-radius-medium;
+    background-color:            @background-pill;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "  ";
+    vertical-align:              0.5;
+    text-color:                  @text-on-pill;
+    background-color:            transparent;
+    font:                        "Fira Sans Bold 14";
+}
+
+entry {
+    enabled:                     true;
+    padding:                     0.8em;
+    text-color:                  @text-on-pill;
+    cursor:                      text;
+    placeholder:                 "Search";
+    background-color:            transparent;
+    placeholder-color:           inherit;
+    vertical-align:              0.5;
+    font:                        "Fira Sans 12";
+}
+
+// Lists //
+listbox {
+    padding:                     3em;
+    spacing:                     0em;
+    orientation:                 vertical;
+    children:                    [ "listview" ];
+    background-color:            transparent;
+}
+
+listview {
+    padding:                     0em;
+    spacing:                     0.8em;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       10;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @on-surface;
+}
+
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     1.5em;
+    padding:                     1em 2em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    border-radius:               @border-radius-medium;
+}
+
+element selected.normal {
+    background-color:            @background-pill;
+    text-color:                  @text-on-pill;
+}
+
+element-icon {
+    size:                        3em;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "Fira Sans Bold 12";
+}
+
+// Error message //
+error-message {
+    text-color:                  @on-surface;
+    background-color:            @background-window;
+    text-transform:              capitalize;
+    children:                    [ "textbox" ];
+}
+
+textbox {
+    text-color:                  inherit;
+    background-color:            inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

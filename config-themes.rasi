@@ -1,0 +1,144 @@
+/*
+#  ____        __ _  
+# |  _ \ ___  / _(_) 
+# | |_) / _ \| |_| | 
+# |  _ < (_) |  _| | 
+# |_| \_\___/|_| |_| 
+#                    
+# by Stephan Raabe (2023) 
+# Modified for beauty & blurry rounded corners
+# ----------------------------------------------------- 
+*/
+
+/* ---- Configuration ---- */
+configuration {
+    modi:                       "drun,filebrowser,window,run";
+    font:                       "Fira Sans 11";
+    show-icons:                 true;
+    display-drun:                " ";
+    display-run:                 " ";
+    display-filebrowser:         " ";
+    display-window:              " ";
+    drun-display-format:        "{name}";
+    hover-select:               false;
+    scroll-method:              1;
+    me-select-entry:            "";
+    me-accept-entry:            "MousePrimary";
+    window-format:              "{w} · {c} · {t}";
+}
+
+/* ---- Load colors ---- */
+@theme "~/.config/rofi/colors.rasi"
+
+/* ---- Custom Colors & Variables ---- */
+* {
+    background-window:           #ffffffEE;
+    background-dark:             #111111;
+    text-dark:                   #111111;
+    text-light:                  #ffffff;
+    border-radius-large:         60px;
+    border-radius-medium:        30px;
+}
+
+// Main Window //
+window {
+    width:                        25em;
+    transparency:                 "real";
+    enabled:                      true;
+    cursor:                       "default";
+    spacing:                      0em;
+    padding:                      0em;
+    border:                       0px;
+    border-radius:                @border-radius-large;
+    background-color:             @background-window;
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     0em;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listview" ];
+    background-color:            transparent;
+}
+
+// Inputs //
+inputbar {
+    enabled:                     true;
+    spacing:                     0.5em;
+    padding:                     1em 1.5em;
+    margin:                      2em 2em 1em 2em;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+    border-radius:               @border-radius-medium;
+    background-color:            @background-dark;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "  ";
+    vertical-align:              0.5;
+    text-color:                  @text-light;
+    background-color:            transparent;
+    font:                        "Fira Sans Bold 12";
+}
+
+entry {
+    enabled:                     true;
+    padding:                     0.5em;
+    text-color:                  @text-light;
+    cursor:                      text;
+    placeholder:                 "Search";
+    background-color:            transparent;
+    placeholder-color:           inherit;
+    vertical-align:              0.5;
+}
+
+// Lists //
+listview {
+    padding:                     1em 2em 2em 2em;
+    spacing:                     0.5em;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       false;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @text-dark;
+}
+
+// Elements //
+element {
+    enabled:                     true;
+    padding:                     0.8em 1.5em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @text-dark;
+    border-radius:               @border-radius-medium;
+}
+
+element selected.normal {
+    background-color:            @background-dark;
+    text-color:                  @text-light;
+}
+
+element-icon {
+    size:                        5em;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "Fira Sans Bold 11";
+}
