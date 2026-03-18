@@ -4,13 +4,11 @@
 # | |_) / _ \| |_| | 
 # |  _ < (_) |  _| | 
 # |_| \_\___/|_| |_| 
-#                    
-# by Stephan Raabe (2023) 
-# Modified for matugen dark beauty
+#
+# Matugen Dynamic Dark Theme
 # ----------------------------------------------------- 
 */
 
-/* ---- Configuration ---- */
 configuration {
     modi:                       "drun,filebrowser,window,run";
     font:                       "Fira Sans 11";
@@ -27,20 +25,27 @@ configuration {
     window-format:              "{w} · {c} · {t}";
 }
 
-/* ---- Load colors ---- */
 @theme "~/.config/rofi/colors.rasi"
 
-/* ---- Custom Variables mapped to Matugen ---- */
+/* ---- Theme Variables ---- */
 * {
-    background-window:           #101417CC; /* surface with transparency */
+    /* Mapped from Matugen colors.rasi */
+    background-window:           rgba(16, 20, 23, 0.8); /* @surface with 80% opacity */
     background-pill:             @primary;
+    background-button:           @surface-container;
+    
     text-on-pill:                @on-primary;
     text-normal:                 @on-surface;
-    border-radius-large:         60px;
-    border-radius-medium:        30px;
+    
+    /* Shape Constants */
+    radius-window:               60px;
+    radius-pill:                 30px;
+    
+    /* Spacing Constants */
+    margin-main:                 3em;
+    spacing-list:                0.8em;
 }
 
-// Main Window //
 window {
     height:                      35em;
     width:                       56em;
@@ -48,24 +53,20 @@ window {
     fullscreen:                  false;
     enabled:                     true;
     cursor:                      "default";
-    spacing:                     0em;
-    padding:                     0em;
     border:                      0px;
-    border-radius:               @border-radius-large;
+    border-radius:               @radius-window;
     background-color:            @background-window;
 }
 
 mainbox {
     enabled:                     true;
-    spacing:                     0em;
-    padding:                     0em;
     orientation:                 horizontal;
     children:                    [ "imagebox" , "listbox" ];
     background-color:            transparent;
 }
 
 imagebox {
-    padding:                     3em;
+    padding:                     @margin-main;
     background-color:            transparent;
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
@@ -75,22 +76,19 @@ dummy {
     background-color:            transparent;
 }
 
-// Modes //
 mode-switcher {
     orientation:                 horizontal;
     enabled:                     true;
-    padding:                     0em;
     spacing:                     1em;
     background-color:            transparent;
 }
 
 button {
     padding:                     1.2em;
-    border-radius:               @border-radius-medium;
-    border:                      0;    
+    border-radius:               @radius-pill;
     cursor:                      pointer;
-    background-color:            @surface-container;
-    text-color:                  @on-surface;
+    background-color:            @background-button;
+    text-color:                  @text-normal;
 }
 
 button selected {
@@ -98,13 +96,12 @@ button selected {
     text-color:                  @text-on-pill;
 }
 
-// Inputs //
 inputbar {
     enabled:                     true;
     spacing:                     0.5em;
     padding:                     0.8em 1.5em;
     children:                    [ "textbox-prompt-colon", "entry" ];
-    border-radius:               @border-radius-medium;
+    border-radius:               @radius-pill;
     background-color:            @background-pill;
 }
 
@@ -130,10 +127,8 @@ entry {
     font:                        "Fira Sans 12";
 }
 
-// Lists //
 listbox {
-    padding:                     3em;
-    spacing:                     0em;
+    padding:                     @margin-main;
     orientation:                 vertical;
     children:                    [ "listview" ];
     background-color:            transparent;
@@ -141,7 +136,7 @@ listbox {
 
 listview {
     padding:                     0em;
-    spacing:                     0.8em;
+    spacing:                     @spacing-list;
     enabled:                     true;
     columns:                     1;
     lines:                       10;
@@ -149,24 +144,20 @@ listview {
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
-    reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    cursor:                      "default";
     background-color:            transparent;
-    text-color:                  @on-surface;
+    text-color:                  @text-normal;
 }
 
-
-// Elements //
 element {
     enabled:                     true;
     spacing:                     1.5em;
     padding:                     1em 2em;
     cursor:                      pointer;
     background-color:            transparent;
-    text-color:                  @on-surface;
-    border-radius:               @border-radius-medium;
+    text-color:                  @text-normal;
+    border-radius:               @radius-pill;
 }
 
 element selected.normal {
@@ -178,23 +169,19 @@ element-icon {
     size:                        3em;
     cursor:                      inherit;
     background-color:            transparent;
-    text-color:                  inherit;
 }
 
 element-text {
     vertical-align:              0.5;
-    horizontal-align:            0.0;
     cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
     font:                        "Fira Sans Bold 12";
 }
 
-// Error message //
 error-message {
-    text-color:                  @on-surface;
+    text-color:                  @text-normal;
     background-color:            @background-window;
-    text-transform:              capitalize;
     children:                    [ "textbox" ];
 }
 

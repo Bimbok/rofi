@@ -4,72 +4,67 @@
 # | |_) / _ \| |_| | 
 # |  _ < (_) |  _| | 
 # |_| \_\___/|_| |_| 
-#                    
-# by Stephan Raabe (2023) 
-# Modified for beauty & blurry rounded corners
+#
+# Theme/Wallpaper Selector - Single Large Preview
 # ----------------------------------------------------- 
 */
 
-/* ---- Configuration ---- */
 configuration {
-    modi:                       "drun,filebrowser,window,run";
-    font:                       "Fira Sans 11";
-    show-icons:                 true;
-    display-drun:                " ";
-    display-run:                 " ";
-    display-filebrowser:         " ";
-    display-window:              " ";
-    drun-display-format:        "{name}";
-    hover-select:               false;
-    scroll-method:              1;
-    me-select-entry:            "";
-    me-accept-entry:            "MousePrimary";
-    window-format:              "{w} · {c} · {t}";
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "Fira Sans 11";
 }
 
-/* ---- Load colors ---- */
 @theme "~/.config/rofi/colors.rasi"
 
-/* ---- Custom Colors & Variables ---- */
+/* ---- Theme Variables ---- */
 * {
-    background-window:           #ffffffEE;
-    background-dark:             #111111;
-    text-dark:                   #111111;
-    text-light:                  #ffffff;
-    border-radius-large:         60px;
-    border-radius-medium:        30px;
+    background-window:           rgba(16, 20, 23, 0.9);
+    background-pill:             @primary;
+    background-button:           @surface-container;
+    text-on-pill:                @on-primary;
+    text-normal:                 @on-surface;
+    radius-window:               60px;
+    radius-pill:                 30px;
 }
 
-// Main Window //
 window {
-    width:                        25em;
-    transparency:                 "real";
-    enabled:                      true;
-    cursor:                       "default";
-    spacing:                      0em;
-    padding:                      0em;
-    border:                       0px;
-    border-radius:                @border-radius-large;
-    background-color:             @background-window;
+    width:                       56em; /* Matches main app menu */
+    height:                      35em; /* Matches main app menu */
+    transparency:                "real";
+    enabled:                     true;
+    cursor:                      "default";
+    border-radius:               @radius-window;
+    background-color:            @background-window;
 }
 
 mainbox {
     enabled:                     true;
-    spacing:                     0em;
-    orientation:                 vertical;
-    children:                    [ "inputbar", "listview" ];
+    orientation:                 horizontal;
+    children:                    [ "imagebox" , "listbox" ];
     background-color:            transparent;
 }
 
-// Inputs //
+imagebox {
+    width:                       20em;
+    padding:                     3em 2em;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy" ];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+// Search Pill //
 inputbar {
     enabled:                     true;
-    spacing:                     0.5em;
     padding:                     1em 1.5em;
-    margin:                      2em 2em 1em 2em;
     children:                    [ "textbox-prompt-colon", "entry" ];
-    border-radius:               @border-radius-medium;
-    background-color:            @background-dark;
+    border-radius:               @radius-pill;
+    background-color:            @background-pill;
 }
 
 textbox-prompt-colon {
@@ -77,68 +72,73 @@ textbox-prompt-colon {
     expand:                      false;
     str:                         "  ";
     vertical-align:              0.5;
-    text-color:                  @text-light;
+    text-color:                  @text-on-pill;
     background-color:            transparent;
-    font:                        "Fira Sans Bold 12";
+    font:                        "Fira Sans Bold 14";
 }
 
 entry {
     enabled:                     true;
-    padding:                     0.5em;
-    text-color:                  @text-light;
-    cursor:                      text;
-    placeholder:                 "Search";
+    padding:                     0.8em;
+    text-color:                  @text-on-pill;
     background-color:            transparent;
+    placeholder:                 "Search Themes...";
     placeholder-color:           inherit;
     vertical-align:              0.5;
 }
 
-// Lists //
+// Single Wallpaper Preview Area //
+listbox {
+    padding:                     2em;
+    orientation:                 vertical;
+    children:                    [ "listview" ];
+    background-color:            transparent;
+}
+
 listview {
-    padding:                     1em 2em 2em 2em;
-    spacing:                     0.5em;
     enabled:                     true;
-    columns:                     1;
-    lines:                       8;
-    cycle:                       false;
+    columns:                     1; /* Show only one */
+    lines:                       1; /* Show only one */
+    spacing:                     0em;
+    cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
-    reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    cursor:                      "default";
     background-color:            transparent;
-    text-color:                  @text-dark;
 }
 
-// Elements //
+// Huge Element for Single View //
 element {
     enabled:                     true;
-    padding:                     0.8em 1.5em;
+    orientation:                 vertical;
+    spacing:                     1em;
+    padding:                     1em;
     cursor:                      pointer;
     background-color:            transparent;
-    text-color:                  @text-dark;
-    border-radius:               @border-radius-medium;
+    text-color:                  @text-normal;
+    border-radius:               @radius-pill;
 }
 
 element selected.normal {
-    background-color:            @background-dark;
-    text-color:                  @text-light;
+    background-color:            rgba(255, 255, 255, 0.1); /* Subtle selection */
+    text-color:                  @text-normal;
 }
 
 element-icon {
-    size:                        5em;
+    size:                        25em; /* Massive single preview */
+    horizontal-align:            0.5;
     cursor:                      inherit;
     background-color:            transparent;
-    text-color:                  inherit;
+    border-radius:               20px;
 }
 
 element-text {
+    horizontal-align:            0.5;
     vertical-align:              0.5;
-    horizontal-align:            0.0;
     cursor:                      inherit;
     background-color:            transparent;
-    text-color:                  inherit;
-    font:                        "Fira Sans Bold 11";
+    text-color:                  @primary; /* Highlight name */
+    font:                        "Fira Sans Bold 14";
 }
