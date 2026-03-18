@@ -1,38 +1,45 @@
 @import "~/.config/rofi/colors.rasi"
 
 * {
-    /* Use your JetBrains font */
     font: "JetBrainsMono Nerd Font 12";
-    
-    /* General defaults */
+
     background-color: transparent;
     text-color:       @on-surface;
-    
-    margin:     0px;
-    padding:    0px;
-    spacing:    0px;
+
+    margin:  0px;
+    padding: 0px;
+    spacing: 0px;
+
+    /* Alpha variants for blur-friendly glass surfaces */
+    surface-alpha: #12140ECC;
+    surface-container-high-alpha: #282b24CC;
+    surface-container-alpha: #1e211aCC;
 }
 
 window {
-    width:          600px;
-    border-radius:  12px;
-    transparency:   "real";
-    background-color: #151218CC;
-    border:         2px;
-    border-color:   @outline-variant;
+    width:            720px;
+    border-radius:    16px;
+    transparency:     "real";
+    background-color: #00000000;
+    border:           1px;
+    border-color:     @outline-variant;
 }
 
 mainbox {
-    padding:    20px;
-    children:   [ inputbar, listview ];
+    padding: 24px;
+    spacing: 16px;
+    children: [ inputbar, listview, mode-switcher ];
+    background-color: @surface-alpha;
+    border-radius: 16px;
 }
 
 inputbar {
-    background-color: @surface-container;
-    border-radius:    8px;
-    padding:          12px;
-    margin:           0 0 12px 0;
-    children:         [ prompt, entry ];
+    background-color: @surface-container-high-alpha;
+    border-radius:    12px;
+    padding:          12px 14px;
+    border:           1px;
+    border-color:     @outline-variant;
+    children:         [ prompt, entry, case-indicator ];
 }
 
 prompt {
@@ -41,20 +48,20 @@ prompt {
 }
 
 entry {
-    placeholder:       "Search...";
+    placeholder:       "Type to search...";
     placeholder-color: @on-surface-variant;
     text-color:        @on-surface;
 }
 
 listview {
-    lines:      8;
-    columns:    1;
-    spacing:    4px;
+    lines:    8;
+    columns:  1;
+    spacing:  6px;
 }
 
 element {
-    padding:       10px;
-    border-radius: 8px;
+    padding:       10px 12px;
+    border-radius: 10px;
     children:      [ element-icon, element-text ];
     spacing:       10px;
 }
@@ -63,25 +70,48 @@ element-icon {
     size: 24px;
 }
 
-/* --- THE FIX IS HERE --- */
 element-text {
     vertical-align: 0.5;
-    /* This ensures text takes the color of its parent (selected or not) */
-    text-color:     inherit; 
+    text-color:     inherit;
 }
 
-/* Normal Item State */
 element normal.normal {
     background-color: transparent;
     text-color:       @on-surface;
 }
 
-/* Selected Item State */
-element selected.normal, element selected.active {
-    /* Your Primary Blue Background */
-    background-color: @primary; 
-    
-    /* Your Dark Text for Contrast */
-    text-color:       @on-primary; 
+element alternate.normal {
+    background-color: @surface-container-alpha;
+    text-color:       @on-surface;
 }
-/* ----------------------- */
+
+element selected.normal, element selected.active {
+    background-color: @primary-container;
+    text-color:       @on-primary-container;
+}
+
+element selected.urgent, element selected.active.urgent {
+    background-color: @error-container;
+    text-color:       @on-error-container;
+}
+
+element urgent.normal {
+    background-color: @error-container;
+    text-color:       @on-error-container;
+}
+
+mode-switcher {
+    spacing: 8px;
+}
+
+button {
+    padding:       6px 10px;
+    border-radius: 8px;
+    background-color: @surface-container-alpha;
+    text-color:       @on-surface-variant;
+}
+
+button selected {
+    background-color: @secondary-container;
+    text-color:       @on-secondary-container;
+}
