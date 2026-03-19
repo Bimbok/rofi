@@ -1,0 +1,119 @@
+/*
+#  ____        __ _  
+# |  _ \ ___  / _(_) 
+# | |_) / _ \| |_| | 
+# |  _ < (_) |  _| | 
+# |_| \_\___/|_| |_| 
+#
+# Clipboard History - Refined Glass Sidebar
+# ----------------------------------------------------- 
+*/
+
+configuration {
+    modi:                        "drun";
+    show-icons:                  false;
+    font:                        "Fira Sans 11";
+}
+
+@theme "~/.config/rofi/colors.rasi"
+
+/* ---- Theme Variables ---- */
+* {
+    background-window:           rgba(16, 20, 23, 0.8);
+    background-pill:             @primary;
+    indicator:                   @primary-fixed;
+    text-on-pill:                @on-primary;
+    text-normal:                 @on-surface;
+    radius-window:               40px; /* Slightly smaller for sidebar */
+    radius-pill:                 20px;
+}
+
+window {
+    width:                       30em;
+    height:                      35em;
+    x-offset:                    -2em;
+    y-offset:                    2em;
+    location:                    northeast;
+    anchor:                      northeast;
+    transparency:                "real";
+    enabled:                     true;
+    border-radius:               @radius-window;
+    background-color:            @background-window;
+}
+
+mainbox {
+    enabled:                     true;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listview" ];
+    background-color:            transparent;
+}
+
+// Search Pill //
+inputbar {
+    enabled:                     true;
+    padding:                     1em 1.5em;
+    margin:                      1.5em;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+    border-radius:               @radius-pill;
+    background-color:            rgba(0, 0, 0, 0.3); /* Dark glass input */
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "  󱘝";
+    vertical-align:              0.5;
+    text-color:                  @primary;
+    background-color:            transparent;
+    font:                        "Fira Sans Bold 14";
+}
+
+entry {
+    enabled:                     true;
+    padding:                     0.5em;
+    text-color:                  @text-normal;
+    background-color:            transparent;
+    placeholder:                 "Search Clipboard...";
+    placeholder-color:           inherit;
+    vertical-align:              0.5;
+}
+
+// Clipboard List //
+listview {
+    padding:                     0em 1.5em 1.5em 1.5em;
+    spacing:                     0.5em;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       10;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    fixed-height:                true;
+    fixed-columns:               true;
+    background-color:            transparent;
+    text-color:                  @text-normal;
+}
+
+element {
+    enabled:                     true;
+    padding:                     1em 1.5em;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @text-normal;
+    border-radius:               @radius-pill;
+}
+
+element selected.normal {
+    background-color:            @background-pill;
+    text-color:                  @text-on-pill;
+    border:                      0px 0px 0px 6px; /* Glow indicator */
+    border-color:                @indicator;
+}
+
+element-text {
+    vertical-align:              0.5;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}

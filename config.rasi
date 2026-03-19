@@ -5,7 +5,7 @@
 # |  _ < (_) |  _| | 
 # |_| \_\___/|_| |_| 
 #
-# Matugen Dynamic Dark Theme
+# Matugen Dynamic Dark Theme - Refined Glass Edition
 # ----------------------------------------------------- 
 */
 
@@ -30,10 +30,12 @@ configuration {
 /* ---- Theme Variables ---- */
 * {
     /* Mapped from Matugen colors.rasi */
-    background-window:           rgba(16, 20, 23, 0.8); /* @surface with 80% opacity */
+    background-window:           rgba(16, 20, 23, 0.7); /* Slightly more glass-like */
+    background-sidebar:          rgba(0, 0, 0, 0.3);    /* Glass-Split effect */
     background-pill:             @primary;
     background-button:           @surface-container;
     
+    indicator:                   @primary-fixed;        /* Glow/Indicator color */
     text-on-pill:                @on-primary;
     text-normal:                 @on-surface;
     
@@ -65,9 +67,12 @@ mainbox {
     background-color:            transparent;
 }
 
+// 1. Implementation: Glass-Split Sidebar //
 imagebox {
+    width:                       22em;
     padding:                     @margin-main;
-    background-color:            transparent;
+    background-color:            @background-sidebar; 
+    border-radius:               60px 0px 0px 60px; /* Round only left side */
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
@@ -135,7 +140,7 @@ listbox {
 }
 
 listview {
-    padding:                     0em;
+    padding:                     0.2em;
     spacing:                     @spacing-list;
     enabled:                     true;
     columns:                     1;
@@ -160,9 +165,12 @@ element {
     border-radius:               @radius-pill;
 }
 
+// 4. Implementation: Glow Indicator Selection //
 element selected.normal {
     background-color:            @background-pill;
     text-color:                  @text-on-pill;
+    border:                      0px 0px 0px 6px; /* Thick indicator */
+    border-color:                @indicator;      /* primary-fixed highlight */
 }
 
 element-icon {
