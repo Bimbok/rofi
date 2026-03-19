@@ -8,9 +8,9 @@ A modern, highly-aesthetic Rofi configuration featuring a **Glass-Split** layout
 | :--------------------------------------------------: | :-----------------------------------------------------------: |
 | ![App Menu](./Sample/2026-03-19-081017_hyprshot.png) | ![Clipboard History](./Sample/2026-03-19-081032_hyprshot.png) |
 
-|                       Wallpaper Selector                       |                      Network & Scripts                       |
-| :------------------------------------------------------------: | :----------------------------------------------------------: |
-| ![Wallpaper Selector](./Sample/2026-03-19-081045_hyprshot.png) | ![Network Selector](./Sample/2026-03-19-081108_hyprshot.png) |
+|                      Wallpaper Selector                      |                     Network & Scripts                      |
+| :----------------------------------------------------------: | :--------------------------------------------------------: |
+| ![Wallpaper Selector](Sample/2026-03-19-081108_hyprshot.png) | ![Network Selector](Sample/2026-03-19-081045_hyprshot.png) |
 
 ## ✨ Key Features
 
